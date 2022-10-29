@@ -43,6 +43,26 @@ class LinkedList {
     // function tail() {}
     // function at(index) {}
     // function pop() {}
+
+    pop() {
+        if (this.size === 0) {
+            return null;
+        }
+        let data = this.tail.data;
+        if (this.size === 1) {
+            this.header = null;
+            this.tail = null;
+        } else {
+            let currentData = this.header;
+            while (currentData.next.next !== null) {
+                currentData = currentData.next;
+            }
+            currentData.next = null;
+            this.tail = currentData;
+        }
+        this.size--;
+        return data;
+    }
     // function contains(value) {}
     // function find(value) {}
     toString() {
@@ -73,7 +93,7 @@ class Node {
 // 4 head -
 // 5 tail -
 // 6
-// 7
+// 7 pop -
 // 8
 // 9
 // 10 toString -
@@ -91,4 +111,5 @@ console.log(conga.sizeOfList());
 console.log(conga.head());
 console.log(conga.tailNode());
 
+console.log(conga.pop());
 console.log(conga.toString());
