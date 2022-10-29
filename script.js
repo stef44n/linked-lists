@@ -73,7 +73,20 @@ class LinkedList {
         return data;
     }
     // function contains(value) {}
-    // function find(value) {}
+
+    find(value) {
+        let currentNode = this.header;
+        let index = -1;
+        while (currentNode) {
+            index++;
+            if (currentNode.data === value) {
+                return index;
+            }
+            currentNode = currentNode.next;
+        }
+        return null;
+    }
+
     toString() {
         let data = "";
         let currentData = this.header;
@@ -101,7 +114,7 @@ class Node {
 // 6 at -
 // 7 pop -
 // 8
-// 9
+// 9 find -
 // 10 toString -
 
 let conga = new LinkedList();
@@ -120,4 +133,5 @@ console.log(`tailNode(): ${conga.tailNode()}`);
 
 console.log(`at(2): ${conga.at(2)}`);
 console.log(`pop(): ${conga.pop()}`);
+console.log(`find('Dog'): ${conga.find("Dog")}`);
 console.log(`toString(): ${conga.toString()}`);
