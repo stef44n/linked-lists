@@ -27,22 +27,31 @@ class LinkedList {
         this.size++;
     }
 
-    // function size() {}
     sizeOfList() {
         return this.size;
     }
 
-    // function head() {}
     head() {
-        return this.header;
+        return this.header.data;
     }
 
     tailNode() {
-        return this.tail;
+        return this.tail.data;
     }
-    // function tail() {}
-    // function at(index) {}
-    // function pop() {}
+
+    at(index) {
+        let currentData = this.header;
+        let count = 0;
+        while (currentData) {
+            if (count == index) {
+                // console.log(currentData.data);
+                return currentData.data;
+            }
+            count++;
+            currentData = currentData.next;
+        }
+        return null;
+    }
 
     pop() {
         if (this.size === 0) {
@@ -69,16 +78,13 @@ class LinkedList {
         let data = "";
         let currentData = this.header;
         while (currentData !== null) {
-            data = data + currentData.data + " ";
+            data = data + currentData.data + " → ";
             currentData = currentData.next;
         }
+        data = data.concat("null");
         return data;
     }
 }
-
-// let defaultValue = null;
-// let defaultNextNode = null;
-// let currentValue = null;
 
 class Node {
     constructor(data) {
@@ -92,7 +98,7 @@ class Node {
 // 3 size -
 // 4 head -
 // 5 tail -
-// 6
+// 6 at -
 // 7 pop -
 // 8
 // 9
@@ -104,12 +110,14 @@ conga.append("Puppy");
 conga.append("Dog");
 conga.append("Cat");
 conga.append("Fish");
+console.log(`toString(): ${conga.toString()}`);
 // console.log(conga.size);
 // console.log(conga.header);
 // console.log(conga.tail);
-console.log(conga.sizeOfList());
-console.log(conga.head());
-console.log(conga.tailNode());
+console.log(`sizeOfList(): ${conga.sizeOfList()}`);
+console.log(`head(): ${conga.head()}`);
+console.log(`tailNode(): ${conga.tailNode()}`);
 
-console.log(conga.pop());
-console.log(conga.toString());
+console.log(`at(2): ${conga.at(2)}`);
+console.log(`pop(): ${conga.pop()}`);
+console.log(`toString(): ${conga.toString()}`);
