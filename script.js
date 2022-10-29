@@ -72,7 +72,17 @@ class LinkedList {
         this.size--;
         return data;
     }
-    // function contains(value) {}
+
+    contains(value) {
+        let currentNode = this.header;
+        while (currentNode) {
+            if (currentNode.data === value) {
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+        return false;
+    }
 
     find(value) {
         let currentNode = this.header;
@@ -113,7 +123,7 @@ class Node {
 // 5 tail -
 // 6 at -
 // 7 pop -
-// 8
+// 8 contains -
 // 9 find -
 // 10 toString -
 
@@ -133,5 +143,8 @@ console.log(`tailNode(): ${conga.tailNode()}`);
 
 console.log(`at(2): ${conga.at(2)}`);
 console.log(`pop(): ${conga.pop()}`);
+console.log(`contains('Dog'): ${conga.contains("Dog")}`);
 console.log(`find('Dog'): ${conga.find("Dog")}`);
+
 console.log(`toString(): ${conga.toString()}`);
+console.log(`contains('Fish'): ${conga.contains("Fish")}`);
