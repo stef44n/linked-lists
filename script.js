@@ -73,6 +73,21 @@ class LinkedList {
         return data;
     }
 
+    removeFirst() {
+        if (this.size === 0) {
+            return null;
+        }
+        let data = this.header.data;
+        if (this.size === 1) {
+            this.header = null;
+            this.tail = null;
+        } else {
+            this.header = this.header.next;
+        }
+        this.size--;
+        return data;
+    }
+
     contains(value) {
         let currentNode = this.header;
         while (currentNode) {
@@ -107,6 +122,53 @@ class LinkedList {
         data = data.concat("null");
         return data;
     }
+
+    insertAt(value, index) {
+        if (index < 0 || index > this.size) {
+            return;
+        }
+        if (index === 0) {
+            this.prepend(value);
+        } else if (index === this.size) {
+            this.append(value);
+        } else {
+            const node = new Node(value);
+            let prevNode = null;
+            let currentNode = this.header;
+            let counter = 0;
+            while (counter < index) {
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+                counter++;
+            }
+            node.next = currentNode;
+            prevNode.next = node;
+            this.size++;
+        }
+    }
+
+    removeAt(index) {
+        if (index < 0 || index > this.size) {
+            return null;
+        }
+        if (index === 0) {
+            return this.removeFirst();
+        } else if (index === this.size - 1) {
+            return this.pop();
+        } else {
+            let prevNode = null;
+            let currentNode = this.header;
+            let counter = 0;
+            while (counter < index) {
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+                counter++;
+            }
+            prevNode.next = currentNode.next;
+            this.size--;
+            return currentNode.data;
+        }
+    }
 }
 
 class Node {
@@ -116,35 +178,26 @@ class Node {
     }
 }
 
-// 1 append -
-// 2 prepend -
-// 3 size -
-// 4 head -
-// 5 tail -
-// 6 at -
-// 7 pop -
-// 8 contains -
-// 9 find -
-// 10 toString -
+// CONSOLE TESTS
 
-let conga = new LinkedList();
-conga.append("Kitten");
-conga.append("Puppy");
-conga.append("Dog");
-conga.append("Cat");
-conga.append("Fish");
-console.log(`toString(): ${conga.toString()}`);
-// console.log(conga.size);
-// console.log(conga.header);
-// console.log(conga.tail);
-console.log(`sizeOfList(): ${conga.sizeOfList()}`);
-console.log(`head(): ${conga.head()}`);
-console.log(`tailNode(): ${conga.tailNode()}`);
+let pets = new LinkedList();
+pets.append("Kitten"); // pets: Kitten
+pets.append("Puppy"); // pets: Kitten Puppy
+pets.append("Dog"); // pets: Kitten Puppy Dog
+pets.append("Cat"); // pets: Kitten Puppy Dog Cat
+pets.append("Fish"); // pets: Kitten Puppy Dog Cat Fish
+console.log(`toString(): ${pets.toString()}`); // Kitten -> Puppy -> Dog -> Cat -> Fish -> null
+// console.log(pets.size);
+// console.log(pets.header);
+// console.log(pets.tail);
+console.log(`sizeOfList(): ${pets.sizeOfList()}`); // 5
+console.log(`head(): ${pets.head()}`); //Kitten
+console.log(`tailNode(): ${pets.tailNode()}`); // Fish
 
-console.log(`at(2): ${conga.at(2)}`);
-console.log(`pop(): ${conga.pop()}`);
-console.log(`contains('Dog'): ${conga.contains("Dog")}`);
-console.log(`find('Dog'): ${conga.find("Dog")}`);
+console.log(`at(2): ${pets.at(2)}`); // Dog
+console.log(`pop(): ${pets.pop()}`); // Fish
+console.log(`contains('Dog'): ${pets.contains("Dog")}`); // true
+console.log(`find('Dog'): ${pets.find("Dog")}`); // 2
 
-console.log(`toString(): ${conga.toString()}`);
-console.log(`contains('Fish'): ${conga.contains("Fish")}`);
+console.log(`toString(): ${pets.toString()}`); // Kitten -> Puppy -> Dog -> Cat -> null
+console.log(`contains('Fish'): ${pets.contains("Fish")}`); // false
